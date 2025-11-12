@@ -1,0 +1,50 @@
+{
+  "_id": "626bda67e3fa2f0a21de0f67",
+  "air_date": "2025-10-26",
+  "episodes": [
+    {
+      "air_date": "2025-10-26",
+      "episode_number": 1,
+      "episode_type": "standard",
+      "id": 3693446,
+      "name": "The Pilot",
+      "overview": "As four misfit kids vow to find their missing classmate, Major Leroy Hanlon arrives to a mixed reception at Derry Air Force Base.",
+      "production_code": "",
+      "runtime": 54,
+      "season_number": 1,
+      "show_id": 200875,
+      "still_path": "/x9yY8btuQt8n0qwnw8L17VRfTYz.jpg",
+      "vote_average": 6.181,
+      "vote_count": 58,
+      "crew": [
+        {
+          "job": "Director",
+          "department": "Directing",
+          "credit_id": "636c3f4e963864009b9f8b18",
+          "adult": false,
+          "gender": 2,
+          "id": 1113116,
+          "known_for_department": "Directing",
+          "name": "Andy Muschietti",
+          "original_name": "Andy Muschietti",
+          "popularity": 1.3063,
+          "profile_path": "/4ndnP2NNavhfGtJqihD4FVDsYMY.jpg"
+        }
+      ]
+    }
+  ],
+  "name": "Season 1",
+  "networks": [
+    {
+      "id": 49,
+      "logo_path": "/tuomPhY2UtuPTqqFnKMVHvSb724.png",
+      "name": "HBO",
+      "origin_country": "US"
+    }
+  ],
+  "overview": "",
+  "id": 291792,
+  "poster_path": "/IFi0kbnVAoEVReaBuhOSj6GBMH.jpg",
+  "season_number": 1,
+  "vote_average": 4.3
+}
