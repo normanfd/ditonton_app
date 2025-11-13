@@ -1,9 +1,9 @@
-import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/common/utils.dart';
-import 'package:ditonton/presentation/provider/tvshow/watchlist_tvshow_notifier.dart';
 import 'package:ditonton/presentation/widgets/tvshow_card_list.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../bloc/watchlist_tv_show/watchlist_tv_show_bloc.dart';
 
 class WatchlistTvShowPage extends StatefulWidget {
   static const ROUTE_NAME = '/watchlist-tvshow';
@@ -14,14 +14,12 @@ class WatchlistTvShowPage extends StatefulWidget {
   _WatchlistTvShowPageState createState() => _WatchlistTvShowPageState();
 }
 
-class _WatchlistTvShowPageState extends State<WatchlistTvShowPage>
-    with RouteAware {
+class _WatchlistTvShowPageState extends State<WatchlistTvShowPage> with RouteAware {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        Provider.of<WatchlistTvshowNotifier>(context, listen: false)
-            .fetchWatchlistTvshow());
+
+    context.read<WatchlistTvshowBloc>().add(FetchWatchlistTvshows());
   }
 
   @override
@@ -32,8 +30,7 @@ class _WatchlistTvShowPageState extends State<WatchlistTvShowPage>
 
   @override
   void didPopNext() {
-    Provider.of<WatchlistTvshowNotifier>(context, listen: false)
-        .fetchWatchlistTvshow();
+    context.read<WatchlistTvshowBloc>().add(FetchWatchlistTvshows());
   }
 
   @override
@@ -44,25 +41,22 @@ class _WatchlistTvShowPageState extends State<WatchlistTvShowPage>
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<WatchlistTvshowNotifier>(
-          builder: (context, data, child) {
-            if (data.watchlistState == RequestState.Loading) {
+        child: BlocBuilder<WatchlistTvshowBloc, WatchlistTvshowState>(
+          builder: (context, state) {
+            if (state is WatchlistTvshowLoading) {
               return Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (data.watchlistState == RequestState.Loaded) {
+            } else if (state is WatchlistTvshowLoaded) {
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  final tvshow = data.watchlistTvshow[index];
+                  final tvshow = state.tvshows[index];
                   return TvshowCard(tvshow);
                 },
-                itemCount: data.watchlistTvshow.length,
+                itemCount: state.tvshows.length,
               );
             } else {
-              return Center(
-                key: Key('error_message'),
-                child: Text(data.message),
-              );
+              return Center(child: Text('Watchlist Anda kosong.'));
             }
           },
         ),

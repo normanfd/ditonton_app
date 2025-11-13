@@ -1,5 +1,19 @@
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/utils.dart';
+import 'package:ditonton/presentation/bloc/movie/movie_detail/movie_detail_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie/movie_list/movie_list_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie/movie_search/movie_search_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie/popular_movie/popular_movie_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie/top_rated_movie/top_rated_movie_bloc.dart';
+import 'package:ditonton/presentation/bloc/movie/watchlist_movie/watchlist_movie_bloc.dart';
+import 'package:ditonton/presentation/bloc/now_playing_tv_show/now_playing_tvshow_bloc.dart';
+import 'package:ditonton/presentation/bloc/popular_tv_show/popular_tv_show_bloc.dart';
+import 'package:ditonton/presentation/bloc/season_detail/season_detail_bloc.dart';
+import 'package:ditonton/presentation/bloc/top_rated_tv_show/top_rated_tv_show_bloc.dart';
+import 'package:ditonton/presentation/bloc/tv_show_detail/tv_show_detail_bloc.dart';
+import 'package:ditonton/presentation/bloc/tv_show_list/tv_show_list_bloc.dart';
+import 'package:ditonton/presentation/bloc/tv_show_search/tv_show_search_bloc.dart';
+import 'package:ditonton/presentation/bloc/watchlist_tv_show/watchlist_tv_show_bloc.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/main_page.dart';
 import 'package:ditonton/presentation/pages/movie/movie_detail_page.dart';
@@ -14,22 +28,9 @@ import 'package:ditonton/presentation/pages/tvshow/top_rated_tvshow_page.dart';
 import 'package:ditonton/presentation/pages/tvshow/tvshow_detail_page.dart';
 import 'package:ditonton/presentation/pages/movie/watchlist_movies_page.dart';
 import 'package:ditonton/presentation/pages/tvshow/watchlist_tv_shows_page.dart';
-import 'package:ditonton/presentation/provider/movie/movie_detail_notifier.dart';
-import 'package:ditonton/presentation/provider/movie/movie_list_notifier.dart';
-import 'package:ditonton/presentation/provider/movie/movie_search_notifier.dart';
-import 'package:ditonton/presentation/provider/movie/popular_movies_notifier.dart';
-import 'package:ditonton/presentation/provider/tvshow/now_playing_tvshow_notifier.dart';
-import 'package:ditonton/presentation/provider/tvshow/popular_tvshow_notifier.dart';
-import 'package:ditonton/presentation/provider/movie/top_rated_movies_notifier.dart';
-import 'package:ditonton/presentation/provider/tvshow/season_detail_notifier.dart';
-import 'package:ditonton/presentation/provider/tvshow/top_rated_tvshow_notifier.dart';
-import 'package:ditonton/presentation/provider/movie/watchlist_movie_notifier.dart';
-import 'package:ditonton/presentation/provider/tvshow/tvshow_detail_notifier.dart';
-import 'package:ditonton/presentation/provider/tvshow/tvshow_list_notifier.dart';
-import 'package:ditonton/presentation/provider/tvshow/tvshow_search_notifier.dart';
-import 'package:ditonton/presentation/provider/tvshow/watchlist_tvshow_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:ditonton/injection.dart' as di;
 
@@ -45,46 +46,23 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieListNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieDetailNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieSearchNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TopRatedMoviesNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<PopularMoviesNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<WatchlistMovieNotifier>(),
-        ),
+        // movie
+        BlocProvider(create: (_) => di.locator<MovieListBloc>()),
+        BlocProvider(create: (_) => di.locator<MovieDetailBloc>()),
+        BlocProvider(create: (_) => di.locator<MovieSearchBloc>()),
+        BlocProvider(create: (_) => di.locator<TopRatedMoviesBloc>()),
+        BlocProvider(create: (_) => di.locator<PopularMoviesBloc>()),
+        BlocProvider(create: (_) => di.locator<WatchlistMovieBloc>()),
+
         // tv show
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvshowListNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<PopularTvshowNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TopRatedTvshowNotifier>(),
-        ),
-        ChangeNotifierProvider(
-            create: (_) => di.locator<TvshowDetailNotifier>()),
-        ChangeNotifierProvider(
-            create: (_) => di.locator<TvshowSearchNotifier>()),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<WatchlistTvshowNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<SeasonDetailNotifier>(),
-        ),
-        ChangeNotifierProvider(
-            create: (_) => di.locator<NowPlayingTvshowNotifier>())
+        BlocProvider(create: (_) => di.locator<NowPlayingTvshowBloc>()),
+        BlocProvider(create: (_) => di.locator<PopularTvshowBloc>()),
+        BlocProvider(create: (_) => di.locator<TopRatedTvshowBloc>()),
+        BlocProvider(create: (_) => di.locator<TvshowSearchBloc>()),
+        BlocProvider(create: (_) => di.locator<TvshowDetailBloc>()),
+        BlocProvider(create: (_) => di.locator<SeasonDetailBloc>()),
+        BlocProvider(create: (_) => di.locator<WatchlistTvshowBloc>()),
+        BlocProvider(create: (_) => di.locator<TvshowListBloc>()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -136,8 +114,7 @@ class MyApp extends StatelessWidget {
               final seriesId = args[0] as int;
               final seasonId = args[1] as int;
               return MaterialPageRoute(
-                builder: (_) => SeasonDetailTvshowPage(
-                    seriesId: seriesId, seasonId: seasonId),
+                builder: (_) => SeasonDetailTvshowPage(seriesId: seriesId, seasonId: seasonId),
                 settings: settings,
               );
             case AboutPage.ROUTE_NAME:
