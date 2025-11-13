@@ -8,14 +8,17 @@ part 'top_rated_tv_show_event.dart';
 
 part 'top_rated_tv_show_state.dart';
 
-class TopRatedTvshowBloc extends Bloc<TopRatedTvshowEvent, TopRatedTvshowState> {
+class TopRatedTvshowBloc
+    extends Bloc<TopRatedTvshowEvent, TopRatedTvshowState> {
   final GetTopRatedTvshow getTopRatedTvshow;
 
-  TopRatedTvshowBloc({required this.getTopRatedTvshow}) : super(TopRatedTvshowEmpty()) {
+  TopRatedTvshowBloc({required this.getTopRatedTvshow})
+      : super(TopRatedTvshowEmpty()) {
     on<FetchTopRatedTvshows>(_onFetchTopRatedTvshows);
   }
 
-  Future<void> _onFetchTopRatedTvshows(FetchTopRatedTvshows event, Emitter<TopRatedTvshowState> emit) async {
+  Future<void> _onFetchTopRatedTvshows(
+      FetchTopRatedTvshows event, Emitter<TopRatedTvshowState> emit) async {
     emit(TopRatedTvshowLoading());
 
     final result = await getTopRatedTvshow.execute();

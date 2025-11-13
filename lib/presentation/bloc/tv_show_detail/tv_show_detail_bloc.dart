@@ -96,7 +96,8 @@ class TvshowDetailBloc extends Bloc<TvshowDetailEvent, TvshowDetailState> {
     emit(state.copyWith(isAddedToWatchlist: result));
   }
 
-  Future<void> _onAddToWatchlist(AddToWatchlist event, Emitter<TvshowDetailState> emit) async {
+  Future<void> _onAddToWatchlist(
+      AddToWatchlist event, Emitter<TvshowDetailState> emit) async {
     final result = await saveWatchlist.execute(event.tvshow);
 
     final message = result.fold(
@@ -112,7 +113,8 @@ class TvshowDetailBloc extends Bloc<TvshowDetailEvent, TvshowDetailState> {
     ));
   }
 
-  Future<void> _onRemoveFromWatchlist(RemoveFromWatchlist event, Emitter<TvshowDetailState> emit) async {
+  Future<void> _onRemoveFromWatchlist(
+      RemoveFromWatchlist event, Emitter<TvshowDetailState> emit) async {
     final result = await removeWatchlist.execute(event.tvshow);
 
     final message = result.fold(

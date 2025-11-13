@@ -4,6 +4,7 @@ import 'package:ditonton/data/datasources/movie/movie_remote_data_source.dart';
 import 'package:ditonton/data/models/movie/movie_detail_response.dart';
 import 'package:ditonton/data/models/movie/movie_response.dart';
 import 'package:ditonton/common/exception.dart';
+import 'package:ditonton/util/crashlytics_helper.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
@@ -21,6 +22,7 @@ void main() {
   setUp(() {
     mockHttpClient = MockHttpClient();
     dataSource = MovieRemoteDataSourceImpl(client: mockHttpClient);
+    CrashlyticsHelper.isTesting = true;
   });
 
   group('get Now Playing Movies', () {
@@ -31,8 +33,7 @@ void main() {
     test('should return list of Movie Model when the response code is 200',
         () async {
       // arrange
-      when(mockHttpClient
-              .get(Uri.parse('$baseUrl/movie/now_playing?$apiKey')))
+      when(mockHttpClient.get(Uri.parse('$baseUrl/movie/now_playing?$apiKey')))
           .thenAnswer((_) async =>
               http.Response(readJson('dummy_data/now_playing.json'), 200));
       // act
@@ -45,8 +46,7 @@ void main() {
         'should throw a ServerException when the response code is 404 or other',
         () async {
       // arrange
-      when(mockHttpClient
-              .get(Uri.parse('$baseUrl/movie/now_playing?$apiKey')))
+      when(mockHttpClient.get(Uri.parse('$baseUrl/movie/now_playing?$apiKey')))
           .thenAnswer((_) async => http.Response('Not Found', 404));
       // act
       final call = dataSource.getNowPlayingMovies();

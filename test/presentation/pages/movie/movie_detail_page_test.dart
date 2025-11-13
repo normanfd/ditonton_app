@@ -10,7 +10,8 @@ import 'package:ditonton/presentation/pages/movie/movie_detail_page.dart';
 
 import '../../../dummy_data/dummy_objects.dart';
 
-class MockMovieDetailBloc extends MockBloc<MovieDetailEvent, MovieDetailState> implements MovieDetailBloc {}
+class MockMovieDetailBloc extends MockBloc<MovieDetailEvent, MovieDetailState>
+    implements MovieDetailBloc {}
 
 void main() {
   late MockMovieDetailBloc mockBloc;
@@ -38,7 +39,8 @@ void main() {
     message: '',
   );
 
-  testWidgets('Watchlist button should display add icon when movie not added to watchlist',
+  testWidgets(
+      'Watchlist button should display add icon when movie not added to watchlist',
       (WidgetTester tester) async {
     final tState = tStateLoaded.copyWith(isAddedToWatchlist: false);
     when(() => mockBloc.state).thenReturn(tState);
@@ -50,7 +52,8 @@ void main() {
     expect(watchlistButtonIcon, findsOneWidget);
   });
 
-  testWidgets('Watchlist button should display check icon when movie is added to wathclist',
+  testWidgets(
+      'Watchlist button should display check icon when movie is added to wathclist',
       (WidgetTester tester) async {
     final tState = tStateLoaded.copyWith(isAddedToWatchlist: true);
     when(() => mockBloc.state).thenReturn(tState);
@@ -62,9 +65,13 @@ void main() {
     expect(watchlistButtonIcon, findsOneWidget);
   });
 
-  testWidgets('Watchlist button should display Snackbar when added to watchlist', (WidgetTester tester) async {
-    final tStateInitial = tStateLoaded.copyWith(isAddedToWatchlist: false, watchlistMessage: '');
-    final tStateSuccess = tStateLoaded.copyWith(isAddedToWatchlist: true, watchlistMessage: 'Added to Watchlist');
+  testWidgets(
+      'Watchlist button should display Snackbar when added to watchlist',
+      (WidgetTester tester) async {
+    final tStateInitial =
+        tStateLoaded.copyWith(isAddedToWatchlist: false, watchlistMessage: '');
+    final tStateSuccess = tStateLoaded.copyWith(
+        isAddedToWatchlist: true, watchlistMessage: 'Added to Watchlist');
 
     when(() => mockBloc.state).thenReturn(tStateInitial);
     whenListen(
@@ -86,9 +93,13 @@ void main() {
     expect(find.text('Added to Watchlist'), findsOneWidget);
   });
 
-  testWidgets('Watchlist button should display AlertDialog when add to watchlist failed', (WidgetTester tester) async {
-    final tStateInitial = tStateLoaded.copyWith(isAddedToWatchlist: false, watchlistMessage: '');
-    final tStateFailed = tStateLoaded.copyWith(isAddedToWatchlist: false, watchlistMessage: 'Failed');
+  testWidgets(
+      'Watchlist button should display AlertDialog when add to watchlist failed',
+      (WidgetTester tester) async {
+    final tStateInitial =
+        tStateLoaded.copyWith(isAddedToWatchlist: false, watchlistMessage: '');
+    final tStateFailed = tStateLoaded.copyWith(
+        isAddedToWatchlist: false, watchlistMessage: 'Failed');
 
     when(() => mockBloc.state).thenReturn(tStateInitial);
     whenListen(

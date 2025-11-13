@@ -11,14 +11,17 @@ part 'season_detail_state.dart';
 class SeasonDetailBloc extends Bloc<SeasonDetailEvent, SeasonDetailState> {
   final GetSeasonDetail getSeasonDetail;
 
-  SeasonDetailBloc({required this.getSeasonDetail}) : super(SeasonDetailEmpty()) {
+  SeasonDetailBloc({required this.getSeasonDetail})
+      : super(SeasonDetailEmpty()) {
     on<FetchSeasonDetail>(_onFetchSeasonDetail);
   }
 
-  Future<void> _onFetchSeasonDetail(FetchSeasonDetail event, Emitter<SeasonDetailState> emit) async {
+  Future<void> _onFetchSeasonDetail(
+      FetchSeasonDetail event, Emitter<SeasonDetailState> emit) async {
     emit(SeasonDetailLoading());
 
-    final result = await getSeasonDetail.execute(event.seriesId, event.seasonId);
+    final result =
+        await getSeasonDetail.execute(event.seriesId, event.seasonId);
 
     result.fold(
       (failure) {

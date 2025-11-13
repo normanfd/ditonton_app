@@ -9,7 +9,9 @@ import 'package:ditonton/presentation/pages/movie/popular_movies_page.dart';
 
 import '../../../dummy_data/dummy_objects.dart';
 
-class MockPopularMoviesBloc extends MockBloc<PopularMoviesEvent, PopularMoviesState> implements PopularMoviesBloc {}
+class MockPopularMoviesBloc
+    extends MockBloc<PopularMoviesEvent, PopularMoviesState>
+    implements PopularMoviesBloc {}
 
 void main() {
   late MockPopularMoviesBloc mockBloc;
@@ -27,7 +29,8 @@ void main() {
     );
   }
 
-  testWidgets('Page should display center progress bar when loading', (WidgetTester tester) async {
+  testWidgets('Page should display center progress bar when loading',
+      (WidgetTester tester) async {
     when(() => mockBloc.state).thenReturn(PopularMoviesLoading());
 
     final progressFinder = find.byType(CircularProgressIndicator);
@@ -39,8 +42,10 @@ void main() {
     expect(progressFinder, findsOneWidget);
   });
 
-  testWidgets('Page should display ListView when data is loaded', (WidgetTester tester) async {
-    when(() => mockBloc.state).thenReturn(PopularMoviesLoaded(<Movie>[testMovie]));
+  testWidgets('Page should display ListView when data is loaded',
+      (WidgetTester tester) async {
+    when(() => mockBloc.state)
+        .thenReturn(PopularMoviesLoaded(<Movie>[testMovie]));
 
     final listViewFinder = find.byType(ListView);
 
@@ -49,7 +54,8 @@ void main() {
     expect(listViewFinder, findsOneWidget);
   });
 
-  testWidgets('Page should display text with message when Error', (WidgetTester tester) async {
+  testWidgets('Page should display text with message when Error',
+      (WidgetTester tester) async {
     when(() => mockBloc.state).thenReturn(PopularMoviesError('Error message'));
 
     await tester.pumpWidget(makeTestableWidget(PopularMoviesPage()));

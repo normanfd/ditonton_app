@@ -17,7 +17,8 @@ void main() {
 
   setUp(() {
     mockGetTopRatedMovies = MockGetTopRatedMovies();
-    topRatedMoviesBloc = TopRatedMoviesBloc(getTopRatedMovies: mockGetTopRatedMovies);
+    topRatedMoviesBloc =
+        TopRatedMoviesBloc(getTopRatedMovies: mockGetTopRatedMovies);
   });
 
   final tMovie = Movie(
@@ -44,7 +45,8 @@ void main() {
   blocTest<TopRatedMoviesBloc, TopRatedMoviesState>(
     'should emit [Loading, Loaded] when data is gotten successfully',
     build: () {
-      when(mockGetTopRatedMovies.execute()).thenAnswer((_) async => Right(tMovieList));
+      when(mockGetTopRatedMovies.execute())
+          .thenAnswer((_) async => Right(tMovieList));
       return TopRatedMoviesBloc(getTopRatedMovies: mockGetTopRatedMovies);
     },
     act: (bloc) => bloc.add(FetchTopRatedMovies()),
@@ -60,7 +62,8 @@ void main() {
   blocTest<TopRatedMoviesBloc, TopRatedMoviesState>(
     'should emit [Loading, Error] when data is unsuccessful',
     build: () {
-      when(mockGetTopRatedMovies.execute()).thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+      when(mockGetTopRatedMovies.execute())
+          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
       return TopRatedMoviesBloc(getTopRatedMovies: mockGetTopRatedMovies);
     },
     act: (bloc) => bloc.add(FetchTopRatedMovies()),

@@ -44,9 +44,12 @@ void main() {
     blocTest<TvshowListBloc, TvshowListState>(
       'should emit [Loading, Loaded] when all usecases are successful',
       build: () {
-        when(mockGetNowPlayingTvshows.execute()).thenAnswer((_) async => Right(testTvshowList));
-        when(mockGetPopularTvshows.execute()).thenAnswer((_) async => Right(testTvshowList));
-        when(mockGetTopRatedTvshows.execute()).thenAnswer((_) async => Right(testTvshowList));
+        when(mockGetNowPlayingTvshows.execute())
+            .thenAnswer((_) async => Right(testTvshowList));
+        when(mockGetPopularTvshows.execute())
+            .thenAnswer((_) async => Right(testTvshowList));
+        when(mockGetTopRatedTvshows.execute())
+            .thenAnswer((_) async => Right(testTvshowList));
 
         return TvshowListBloc(
           getNowPlayingTvshows: mockGetNowPlayingTvshows,
@@ -82,9 +85,12 @@ void main() {
     blocTest<TvshowListBloc, TvshowListState>(
       'should emit [Loading, State] with one Error when NowPlaying fails',
       build: () {
-        when(mockGetNowPlayingTvshows.execute()).thenAnswer((_) async => Left(ServerFailure('Server Failure')));
-        when(mockGetPopularTvshows.execute()).thenAnswer((_) async => Right(testTvshowList));
-        when(mockGetTopRatedTvshows.execute()).thenAnswer((_) async => Right(testTvshowList));
+        when(mockGetNowPlayingTvshows.execute())
+            .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+        when(mockGetPopularTvshows.execute())
+            .thenAnswer((_) async => Right(testTvshowList));
+        when(mockGetTopRatedTvshows.execute())
+            .thenAnswer((_) async => Right(testTvshowList));
 
         return TvshowListBloc(
           getNowPlayingTvshows: mockGetNowPlayingTvshows,

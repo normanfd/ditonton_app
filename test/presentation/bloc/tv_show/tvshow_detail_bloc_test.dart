@@ -47,8 +47,10 @@ void main() {
     blocTest<TvshowDetailBloc, TvshowDetailState>(
       'should emit [Loading, Loaded] when data is gotten successfully',
       build: () {
-        when(mockGetTvshowDetail.execute(tId)).thenAnswer((_) async => Right(testTvshowDetail));
-        when(mockGetTvshowRecommendations.execute(tId)).thenAnswer((_) async => Right(tTvshowList));
+        when(mockGetTvshowDetail.execute(tId))
+            .thenAnswer((_) async => Right(testTvshowDetail));
+        when(mockGetTvshowRecommendations.execute(tId))
+            .thenAnswer((_) async => Right(tTvshowList));
         when(mockGetWatchlistStatus.execute(tId)).thenAnswer((_) async => true);
         return TvshowDetailBloc(
           getTvshowDetail: mockGetTvshowDetail,
@@ -79,9 +81,11 @@ void main() {
     blocTest<TvshowDetailBloc, TvshowDetailState>(
       'should emit [Loading, Error] when GetTvshowDetail fails',
       build: () {
-        when(mockGetTvshowDetail.execute(tId)).thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+        when(mockGetTvshowDetail.execute(tId))
+            .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
 
-        when(mockGetTvshowRecommendations.execute(tId)).thenAnswer((_) async => Right(tTvshowList));
+        when(mockGetTvshowRecommendations.execute(tId))
+            .thenAnswer((_) async => Right(tTvshowList));
         when(mockGetWatchlistStatus.execute(tId)).thenAnswer((_) async => true);
         return TvshowDetailBloc(
           getTvshowDetail: mockGetTvshowDetail,
@@ -104,8 +108,10 @@ void main() {
     blocTest<TvshowDetailBloc, TvshowDetailState>(
       'should emit [Loading, Loaded] with recommendation error when GetTvshowRecommendations fails',
       build: () {
-        when(mockGetTvshowDetail.execute(tId)).thenAnswer((_) async => Right(testTvshowDetail));
-        when(mockGetTvshowRecommendations.execute(tId)).thenAnswer((_) async => Left(ServerFailure('Failed')));
+        when(mockGetTvshowDetail.execute(tId))
+            .thenAnswer((_) async => Right(testTvshowDetail));
+        when(mockGetTvshowRecommendations.execute(tId))
+            .thenAnswer((_) async => Left(ServerFailure('Failed')));
         when(mockGetWatchlistStatus.execute(tId)).thenAnswer((_) async => true);
         return TvshowDetailBloc(
           getTvshowDetail: mockGetTvshowDetail,
@@ -133,7 +139,8 @@ void main() {
     blocTest<TvshowDetailBloc, TvshowDetailState>(
       'should emit new state with success message when AddToWatchlist is successful',
       build: () {
-        when(mockSaveWatchlist.execute(testTvshowDetail)).thenAnswer((_) async => Right('Added to Watchlist'));
+        when(mockSaveWatchlist.execute(testTvshowDetail))
+            .thenAnswer((_) async => Right('Added to Watchlist'));
         when(mockGetWatchlistStatus.execute(testTvshowDetail.id))
             .thenAnswer((_) async => true);
         return TvshowDetailBloc(
@@ -160,8 +167,10 @@ void main() {
     blocTest<TvshowDetailBloc, TvshowDetailState>(
       'should emit new state with failure message when AddToWatchlist fails',
       build: () {
-        when(mockSaveWatchlist.execute(testTvshowDetail)).thenAnswer((_) async => Left(DatabaseFailure('Failed')));
-        when(mockGetWatchlistStatus.execute(testTvshowDetail.id)).thenAnswer((_) async => false);
+        when(mockSaveWatchlist.execute(testTvshowDetail))
+            .thenAnswer((_) async => Left(DatabaseFailure('Failed')));
+        when(mockGetWatchlistStatus.execute(testTvshowDetail.id))
+            .thenAnswer((_) async => false);
         return TvshowDetailBloc(
           getTvshowDetail: mockGetTvshowDetail,
           getTvshowRecommendations: mockGetTvshowRecommendations,
@@ -182,8 +191,10 @@ void main() {
     blocTest<TvshowDetailBloc, TvshowDetailState>(
       'should emit new state with success message when RemoveFromWatchlist is successful',
       build: () {
-        when(mockRemoveWatchlist.execute(testTvshowDetail)).thenAnswer((_) async => Right('Removed'));
-        when(mockGetWatchlistStatus.execute(testTvshowDetail.id)).thenAnswer((_) async => false);
+        when(mockRemoveWatchlist.execute(testTvshowDetail))
+            .thenAnswer((_) async => Right('Removed'));
+        when(mockGetWatchlistStatus.execute(testTvshowDetail.id))
+            .thenAnswer((_) async => false);
         return TvshowDetailBloc(
           getTvshowDetail: mockGetTvshowDetail,
           getTvshowRecommendations: mockGetTvshowRecommendations,

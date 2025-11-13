@@ -28,14 +28,21 @@ import 'package:ditonton/presentation/pages/tvshow/top_rated_tvshow_page.dart';
 import 'package:ditonton/presentation/pages/tvshow/tvshow_detail_page.dart';
 import 'package:ditonton/presentation/pages/movie/watchlist_movies_page.dart';
 import 'package:ditonton/presentation/pages/tvshow/watchlist_tv_shows_page.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:ditonton/injection.dart' as di;
 
+import 'firebase_options.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   await di.init();
   runApp(MyApp());
 }
@@ -115,7 +122,8 @@ class MyApp extends StatelessWidget {
               final seriesId = args[0] as int;
               final seasonId = args[1] as int;
               return MaterialPageRoute(
-                builder: (_) => SeasonDetailTvshowPage(seriesId: seriesId, seasonId: seasonId),
+                builder: (_) => SeasonDetailTvshowPage(
+                    seriesId: seriesId, seasonId: seasonId),
                 settings: settings,
               );
             case AboutPage.ROUTE_NAME:

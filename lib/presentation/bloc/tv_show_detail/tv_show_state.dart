@@ -38,7 +38,8 @@ class TvshowDetailState extends Equatable {
       tvshowState: tvshowState ?? this.tvshowState,
       tvshow: tvshow ?? this.tvshow,
       recommendationState: recommendationState ?? this.recommendationState,
-      tvshowRecommendations: tvshowRecommendations ?? this.tvshowRecommendations,
+      tvshowRecommendations:
+          tvshowRecommendations ?? this.tvshowRecommendations,
       isAddedToWatchlist: isAddedToWatchlist ?? this.isAddedToWatchlist,
       watchlistMessage: watchlistMessage ?? '',
       message: message ?? this.message,

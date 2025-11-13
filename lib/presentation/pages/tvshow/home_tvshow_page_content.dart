@@ -35,10 +35,12 @@ class _HomeTvshowPageContentState extends State<HomeTvshowPageContent> {
           children: [
             _buildSubHeading(
               title: 'Now Playing',
-              onTap: () => Navigator.pushNamed(context, NowPlayingTvshowPage.ROUTE_NAME),
+              onTap: () =>
+                  Navigator.pushNamed(context, NowPlayingTvshowPage.ROUTE_NAME),
             ),
             BlocBuilder<TvshowListBloc, TvshowListState>(
-              buildWhen: (prev, current) => prev.nowPlayingState != current.nowPlayingState,
+              buildWhen: (prev, current) =>
+                  prev.nowPlayingState != current.nowPlayingState,
               builder: (context, state) {
                 if (state.nowPlayingState == RequestState.Loading) {
                   return Center(
@@ -47,16 +49,20 @@ class _HomeTvshowPageContentState extends State<HomeTvshowPageContent> {
                 } else if (state.nowPlayingState == RequestState.Loaded) {
                   return TvshowList(state.nowPlayingTvshows);
                 } else {
-                  return Text(state.nowPlayingMessage.isNotEmpty ? state.nowPlayingMessage : 'Failed');
+                  return Text(state.nowPlayingMessage.isNotEmpty
+                      ? state.nowPlayingMessage
+                      : 'Failed');
                 }
               },
             ),
             _buildSubHeading(
               title: 'Popular',
-              onTap: () => Navigator.pushNamed(context, PopularTvshowPage.ROUTE_NAME),
+              onTap: () =>
+                  Navigator.pushNamed(context, PopularTvshowPage.ROUTE_NAME),
             ),
             BlocBuilder<TvshowListBloc, TvshowListState>(
-              buildWhen: (prev, current) => prev.popularTvshowsState != current.popularTvshowsState,
+              buildWhen: (prev, current) =>
+                  prev.popularTvshowsState != current.popularTvshowsState,
               builder: (context, state) {
                 if (state.popularTvshowsState == RequestState.Loading) {
                   return Center(
@@ -65,16 +71,20 @@ class _HomeTvshowPageContentState extends State<HomeTvshowPageContent> {
                 } else if (state.popularTvshowsState == RequestState.Loaded) {
                   return TvshowList(state.popularTvshows);
                 } else {
-                  return Text(state.popularMessage.isNotEmpty ? state.popularMessage : 'Failed');
+                  return Text(state.popularMessage.isNotEmpty
+                      ? state.popularMessage
+                      : 'Failed');
                 }
               },
             ),
             _buildSubHeading(
               title: 'Top Rated',
-              onTap: () => Navigator.pushNamed(context, TopRatedTvshowPage.ROUTE_NAME),
+              onTap: () =>
+                  Navigator.pushNamed(context, TopRatedTvshowPage.ROUTE_NAME),
             ),
             BlocBuilder<TvshowListBloc, TvshowListState>(
-              buildWhen: (prev, current) => prev.topRatedTvshowsState != current.topRatedTvshowsState,
+              buildWhen: (prev, current) =>
+                  prev.topRatedTvshowsState != current.topRatedTvshowsState,
               builder: (context, state) {
                 if (state.topRatedTvshowsState == RequestState.Loading) {
                   return Center(
@@ -83,7 +93,9 @@ class _HomeTvshowPageContentState extends State<HomeTvshowPageContent> {
                 } else if (state.topRatedTvshowsState == RequestState.Loaded) {
                   return TvshowList(state.topRatedTvshows);
                 } else {
-                  return Text(state.topRatedMessage.isNotEmpty ? state.topRatedMessage : 'Failed');
+                  return Text(state.topRatedMessage.isNotEmpty
+                      ? state.topRatedMessage
+                      : 'Failed');
                 }
               },
             ),

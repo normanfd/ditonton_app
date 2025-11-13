@@ -8,10 +8,12 @@ part 'watchlist_tv_show_event.dart';
 
 part 'watchlist_tv_show_state.dart';
 
-class WatchlistTvshowBloc extends Bloc<WatchlistTvshowEvent, WatchlistTvshowState> {
+class WatchlistTvshowBloc
+    extends Bloc<WatchlistTvshowEvent, WatchlistTvshowState> {
   final GetWatchlistTvshow getWatchlistTvshow;
 
-  WatchlistTvshowBloc({required this.getWatchlistTvshow}) : super(WatchlistTvshowEmpty()) {
+  WatchlistTvshowBloc({required this.getWatchlistTvshow})
+      : super(WatchlistTvshowEmpty()) {
     on<FetchWatchlistTvshows>(_onFetchWatchlistTvshows);
   }
 

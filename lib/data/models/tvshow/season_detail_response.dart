@@ -31,13 +31,13 @@ class SeasonDetailResponse extends Equatable {
         idMongo: json['_id'] as String?,
         airDate: json['air_date'] as String?,
         episodes: (json['episodes'] as List<dynamic>?)
-            ?.map((e) => EpisodeModel.fromJson(e as Map<String, dynamic>))
-            .toList() ??
+                ?.map((e) => EpisodeModel.fromJson(e as Map<String, dynamic>))
+                .toList() ??
             [],
         name: json['name'] as String?,
         networks: (json['networks'] as List<dynamic>?)
-            ?.map((e) => NetworkModel.fromJson(e as Map<String, dynamic>))
-            .toList() ??
+                ?.map((e) => NetworkModel.fromJson(e as Map<String, dynamic>))
+                .toList() ??
             [],
         overview: json['overview'] as String?,
         id: (json['id'] is int)
@@ -53,8 +53,7 @@ class SeasonDetailResponse extends Equatable {
       );
 
   @override
-  List<Object?> get props =>
-      [
+  List<Object?> get props => [
         idMongo,
         airDate,
         episodes,
@@ -118,8 +117,7 @@ class EpisodeModel extends Equatable {
     this.guestStars = const [],
   });
 
-  factory EpisodeModel.fromJson(Map<String, dynamic> json) =>
-      EpisodeModel(
+  factory EpisodeModel.fromJson(Map<String, dynamic> json) => EpisodeModel(
         airDate: json['air_date'] as String?,
         episodeNumber: (json['episode_number'] is int)
             ? json['episode_number'] as int
@@ -152,8 +150,7 @@ class EpisodeModel extends Equatable {
       );
 
   @override
-  List<Object?> get props =>
-      [
+  List<Object?> get props => [
         airDate,
         episodeNumber,
         episodeType,
@@ -197,8 +194,7 @@ class NetworkModel extends Equatable {
     this.originCountry,
   });
 
-  factory NetworkModel.fromJson(Map<String, dynamic> json) =>
-      NetworkModel(
+  factory NetworkModel.fromJson(Map<String, dynamic> json) => NetworkModel(
         id: (json['id'] is int)
             ? json['id'] as int
             : int.tryParse('${json['id']}') ?? 0,

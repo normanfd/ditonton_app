@@ -36,7 +36,8 @@ class _HomeMoviePageContentState extends State<HomeMoviePageContent> {
               style: kHeading6,
             ),
             BlocBuilder<MovieListBloc, MovieListState>(
-                buildWhen: (prev, current) => prev.nowPlayingState != current.nowPlayingState,
+                buildWhen: (prev, current) =>
+                    prev.nowPlayingState != current.nowPlayingState,
                 builder: (context, state) {
                   if (state.nowPlayingState == RequestState.Loading) {
                     return Center(
@@ -45,15 +46,19 @@ class _HomeMoviePageContentState extends State<HomeMoviePageContent> {
                   } else if (state.nowPlayingState == RequestState.Loaded) {
                     return MovieList(state.nowPlayingMovies);
                   } else {
-                    return Text(state.nowPlayingMessage.isNotEmpty ? state.nowPlayingMessage : 'Failed');
+                    return Text(state.nowPlayingMessage.isNotEmpty
+                        ? state.nowPlayingMessage
+                        : 'Failed');
                   }
                 }),
             _buildSubHeading(
               title: 'Popular',
-              onTap: () => Navigator.pushNamed(context, PopularMoviesPage.ROUTE_NAME),
+              onTap: () =>
+                  Navigator.pushNamed(context, PopularMoviesPage.ROUTE_NAME),
             ),
             BlocBuilder<MovieListBloc, MovieListState>(
-                buildWhen: (prev, current) => prev.popularMoviesState != current.popularMoviesState,
+                buildWhen: (prev, current) =>
+                    prev.popularMoviesState != current.popularMoviesState,
                 builder: (context, state) {
                   if (state.popularMoviesState == RequestState.Loading) {
                     return Center(
@@ -62,15 +67,19 @@ class _HomeMoviePageContentState extends State<HomeMoviePageContent> {
                   } else if (state.popularMoviesState == RequestState.Loaded) {
                     return MovieList(state.popularMovies);
                   } else {
-                    return Text(state.nowPlayingMessage.isNotEmpty ? state.nowPlayingMessage : 'Failed');
+                    return Text(state.nowPlayingMessage.isNotEmpty
+                        ? state.nowPlayingMessage
+                        : 'Failed');
                   }
                 }),
             _buildSubHeading(
               title: 'Top Rated',
-              onTap: () => Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME),
+              onTap: () =>
+                  Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME),
             ),
             BlocBuilder<MovieListBloc, MovieListState>(
-                buildWhen: (prev, current) => prev.topRatedMoviesState != current.topRatedMoviesState,
+                buildWhen: (prev, current) =>
+                    prev.topRatedMoviesState != current.topRatedMoviesState,
                 builder: (context, state) {
                   if (state.topRatedMoviesState == RequestState.Loading) {
                     return Center(
@@ -79,7 +88,9 @@ class _HomeMoviePageContentState extends State<HomeMoviePageContent> {
                   } else if (state.topRatedMoviesState == RequestState.Loaded) {
                     return MovieList(state.topRatedMovies);
                   } else {
-                    return Text(state.nowPlayingMessage.isNotEmpty ? state.nowPlayingMessage : 'Failed');
+                    return Text(state.nowPlayingMessage.isNotEmpty
+                        ? state.nowPlayingMessage
+                        : 'Failed');
                   }
                 }),
           ],

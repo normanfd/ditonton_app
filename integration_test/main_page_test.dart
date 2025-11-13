@@ -21,7 +21,6 @@ void main() {
 
     testWidgets('Bottom navigation bar switches pages and updates AppBar title',
         (WidgetTester tester) async {
-
       await tester.pumpWidget(app.MyApp());
       await tester.pumpAndSettle();
 

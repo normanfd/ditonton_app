@@ -51,9 +51,11 @@ final locator = GetIt.instance;
 
 Future<void> init() async {
   // bloc - tvshow
-  locator.registerFactory(() => NowPlayingTvshowBloc(getNowPlayingTvshow: locator()));
+  locator.registerFactory(
+      () => NowPlayingTvshowBloc(getNowPlayingTvshow: locator()));
   locator.registerFactory(() => PopularTvshowBloc(getPopularTvshow: locator()));
-  locator.registerFactory(() => TopRatedTvshowBloc(getTopRatedTvshow: locator()));
+  locator
+      .registerFactory(() => TopRatedTvshowBloc(getTopRatedTvshow: locator()));
   locator.registerFactory(() => TvshowSearchBloc(searchTvShow: locator()));
   locator.registerFactory(() => TvshowDetailBloc(
       getTvshowDetail: locator(),
@@ -62,12 +64,18 @@ Future<void> init() async {
       saveWatchlist: locator(),
       removeWatchlist: locator()));
   locator.registerFactory(() => SeasonDetailBloc(getSeasonDetail: locator()));
-  locator.registerFactory(() => WatchlistTvshowBloc(getWatchlistTvshow: locator()));
-  locator.registerFactory(() =>
-      TvshowListBloc(getNowPlayingTvshows: locator(), getPopularTvshows: locator(), getTopRatedTvshows: locator()));
+  locator.registerFactory(
+      () => WatchlistTvshowBloc(getWatchlistTvshow: locator()));
+  locator.registerFactory(() => TvshowListBloc(
+      getNowPlayingTvshows: locator(),
+      getPopularTvshows: locator(),
+      getTopRatedTvshows: locator()));
   // bloc - movie
   locator.registerFactory(
-    () => MovieListBloc(getNowPlayingMovies: locator(), getPopularMovies: locator(), getTopRatedMovies: locator()),
+    () => MovieListBloc(
+        getNowPlayingMovies: locator(),
+        getPopularMovies: locator(),
+        getTopRatedMovies: locator()),
   );
   locator.registerFactory(
     () => MovieDetailBloc(
@@ -79,8 +87,10 @@ Future<void> init() async {
   );
   locator.registerFactory(() => MovieSearchBloc(searchMovies: locator()));
   locator.registerFactory(() => PopularMoviesBloc(locator()));
-  locator.registerFactory(() => TopRatedMoviesBloc(getTopRatedMovies: locator()));
-  locator.registerFactory(() => WatchlistMovieBloc(getWatchlistMovies: locator()));
+  locator
+      .registerFactory(() => TopRatedMoviesBloc(getTopRatedMovies: locator()));
+  locator
+      .registerFactory(() => WatchlistMovieBloc(getWatchlistMovies: locator()));
 
   // use case
   locator.registerLazySingleton(() => GetNowPlayingMovies(locator()));
@@ -121,9 +131,12 @@ Future<void> init() async {
   );
 
   // data sources
-  locator.registerLazySingleton<MovieRemoteDataSource>(() => MovieRemoteDataSourceImpl(client: locator()));
-  locator.registerLazySingleton<LocalDataSource>(() => LocalDataSourceImpl(databaseHelper: locator()));
-  locator.registerLazySingleton<TvshowRemoteDataSource>(() => TvshowRemoteDataSourceImpl(client: locator()));
+  locator.registerLazySingleton<MovieRemoteDataSource>(
+      () => MovieRemoteDataSourceImpl(client: locator()));
+  locator.registerLazySingleton<LocalDataSource>(
+      () => LocalDataSourceImpl(databaseHelper: locator()));
+  locator.registerLazySingleton<TvshowRemoteDataSource>(
+      () => TvshowRemoteDataSourceImpl(client: locator()));
 
   // helper
   locator.registerLazySingleton<DatabaseHelper>(() => DatabaseHelper());

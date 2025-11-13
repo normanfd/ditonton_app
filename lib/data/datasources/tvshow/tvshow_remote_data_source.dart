@@ -4,17 +4,24 @@ import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/data/models/tvshow/season_detail_response.dart';
 import 'package:http/http.dart' as http;
 
+import '../../../util/crashlytics_helper.dart';
 import '../../models/tvshow/tvshow_detail_response.dart';
 import '../../models/tvshow/tvshow_model.dart';
 import '../../models/tvshow/tvshow_response.dart';
 
 abstract class TvshowRemoteDataSource {
   Future<List<TvshowModel>> getNowPlayingTvshow();
+
   Future<List<TvshowModel>> getPopularTvshow();
+
   Future<List<TvshowModel>> getTopRatedTvshow();
+
   Future<TvshowDetailResponse> getTvshowDetail(int id);
+
   Future<List<TvshowModel>> getTvshowRecommendations(int id);
+
   Future<List<TvshowModel>> searchTvshow(String query);
+
   Future<SeasonDetailResponse> getTvshowSeasonDetail(
       int seriesId, int seasonId);
 }
@@ -35,6 +42,8 @@ class TvshowRemoteDataSourceImpl implements TvshowRemoteDataSource {
     if (response.statusCode == 200) {
       return TvshowResponse.fromJson(json.decode(response.body)).movieList;
     } else {
+      await CrashlyticsHelper.recordApiError(
+          '$BASE_URL/tv/on_the_air', response);
       throw ServerException();
     }
   }
@@ -46,6 +55,7 @@ class TvshowRemoteDataSourceImpl implements TvshowRemoteDataSource {
     if (response.statusCode == 200) {
       return TvshowDetailResponse.fromJson(json.decode(response.body));
     } else {
+      await CrashlyticsHelper.recordApiError('$BASE_URL/tv/$id', response);
       throw ServerException();
     }
   }
@@ -58,6 +68,8 @@ class TvshowRemoteDataSourceImpl implements TvshowRemoteDataSource {
     if (response.statusCode == 200) {
       return TvshowResponse.fromJson(json.decode(response.body)).movieList;
     } else {
+      await CrashlyticsHelper.recordApiError(
+          '$BASE_URL/tv/$id/recommendations', response);
       throw ServerException();
     }
   }
@@ -70,6 +82,7 @@ class TvshowRemoteDataSourceImpl implements TvshowRemoteDataSource {
     if (response.statusCode == 200) {
       return TvshowResponse.fromJson(json.decode(response.body)).movieList;
     } else {
+      await CrashlyticsHelper.recordApiError('$BASE_URL/tv/popular', response);
       throw ServerException();
     }
   }
@@ -82,6 +95,8 @@ class TvshowRemoteDataSourceImpl implements TvshowRemoteDataSource {
     if (response.statusCode == 200) {
       return TvshowResponse.fromJson(json.decode(response.body)).movieList;
     } else {
+      await CrashlyticsHelper.recordApiError(
+          '$BASE_URL/tv/top_rated', response);
       throw ServerException();
     }
   }
@@ -94,6 +109,8 @@ class TvshowRemoteDataSourceImpl implements TvshowRemoteDataSource {
     if (response.statusCode == 200) {
       return TvshowResponse.fromJson(json.decode(response.body)).movieList;
     } else {
+      await CrashlyticsHelper.recordApiError(
+          '$BASE_URL/search/tv?query=$query', response);
       throw ServerException();
     }
   }
@@ -107,6 +124,8 @@ class TvshowRemoteDataSourceImpl implements TvshowRemoteDataSource {
     if (response.statusCode == 200) {
       return SeasonDetailResponse.fromJson(json.decode(response.body));
     } else {
+      await CrashlyticsHelper.recordApiError(
+          '$BASE_URL/tv/$seriesId/season/$seasonId', response);
       throw ServerException();
     }
   }

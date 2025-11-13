@@ -22,7 +22,7 @@ class SearchPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
-              onChanged: (query){
+              onChanged: (query) {
                 context.read<MovieSearchBloc>().add(OnMovieQueryChanged(query));
               },
               decoration: InputDecoration(

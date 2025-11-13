@@ -50,7 +50,9 @@ void main() {
 
       await tester.pumpWidget(createTestableWidget(
         child: SeasonEpisodeCardList(data.episodes.first),
-        routes: {SeasonDetailTvshowPage.ROUTE_NAME: (context) => dummyDetailPage},
+        routes: {
+          SeasonDetailTvshowPage.ROUTE_NAME: (context) => dummyDetailPage
+        },
       ));
 
       expect(find.text('1. '), findsNWidgets(1));

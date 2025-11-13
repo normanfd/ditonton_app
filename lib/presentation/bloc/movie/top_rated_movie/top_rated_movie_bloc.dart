@@ -8,10 +8,12 @@ part 'top_rated_movie_event.dart';
 
 part 'top_rated_movie_state.dart';
 
-class TopRatedMoviesBloc extends Bloc<TopRatedMoviesEvent, TopRatedMoviesState> {
+class TopRatedMoviesBloc
+    extends Bloc<TopRatedMoviesEvent, TopRatedMoviesState> {
   final GetTopRatedMovies getTopRatedMovies;
 
-  TopRatedMoviesBloc({required this.getTopRatedMovies}) : super(TopRatedMoviesEmpty()) {
+  TopRatedMoviesBloc({required this.getTopRatedMovies})
+      : super(TopRatedMoviesEmpty()) {
     on<FetchTopRatedMovies>(_onFetchTopRatedMovies);
   }
 

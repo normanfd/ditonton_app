@@ -7,7 +7,9 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:mocktail/mocktail.dart';
 import '../../../dummy_data/dummy_objects.dart';
 
-class MockPopularTvshowBloc extends MockBloc<PopularTvshowEvent, PopularTvshowState> implements PopularTvshowBloc {}
+class MockPopularTvshowBloc
+    extends MockBloc<PopularTvshowEvent, PopularTvshowState>
+    implements PopularTvshowBloc {}
 
 void main() {
   late MockPopularTvshowBloc mockBloc;
@@ -25,7 +27,8 @@ void main() {
     );
   }
 
-  testWidgets('Page should display center progress bar when loading', (WidgetTester tester) async {
+  testWidgets('Page should display center progress bar when loading',
+      (WidgetTester tester) async {
     when(() => mockBloc.state).thenReturn(PopularTvshowLoading());
 
     final progressBarFinder = find.byType(CircularProgressIndicator);
@@ -37,7 +40,8 @@ void main() {
     expect(progressBarFinder, findsOneWidget);
   });
 
-  testWidgets('Page should display ListView when data is loaded', (WidgetTester tester) async {
+  testWidgets('Page should display ListView when data is loaded',
+      (WidgetTester tester) async {
     when(() => mockBloc.state).thenReturn(PopularTvshowLoaded([testTvshow]));
 
     final listViewFinder = find.byType(ListView);
@@ -47,7 +51,8 @@ void main() {
     expect(listViewFinder, findsOneWidget);
   });
 
-  testWidgets('Page should display text with message when Error', (WidgetTester tester) async {
+  testWidgets('Page should display text with message when Error',
+      (WidgetTester tester) async {
     when(() => mockBloc.state).thenReturn(PopularTvshowError('Error message'));
 
     final textFinder = find.byKey(Key('error_message'));

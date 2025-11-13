@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../domain/entities/Tvshow.dart';
-import '../../../domain/usecases/tvshow/get_now_playing_tvshow.dart';
 import '../../../domain/usecases/tvshow/get_popular_tvshow.dart';
 
 part 'popular_tv_show_event.dart';

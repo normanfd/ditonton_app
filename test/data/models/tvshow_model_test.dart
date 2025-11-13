@@ -3,7 +3,6 @@ import 'package:ditonton/domain/entities/Tvshow.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-
   final tTvshowModel = TvshowModel(
     backdropPath: "/mAJ84W6I8I272Da87qplS2Dp9ST.jpg",
     firstAirDate: "2023-01-23",
@@ -13,7 +12,8 @@ void main() {
     originCountry: ["PH"],
     originalLanguage: "tl",
     originalName: "Dirty Linen",
-    overview: "To exact vengeance, a young woman infiltrates the household of an influential family as a housemaid to expose their dirty secrets. However, love will get in the way of her revenge plot.",
+    overview:
+        "To exact vengeance, a young woman infiltrates the household of an influential family as a housemaid to expose their dirty secrets. However, love will get in the way of her revenge plot.",
     popularity: 2684.061,
     posterPath: "/ujlkQtHAVShWyWTloGU2Vh5Jbo9.jpg",
     voteAverage: 5,
@@ -29,7 +29,8 @@ void main() {
     originCountry: ["PH"],
     originalLanguage: "tl",
     originalName: "Dirty Linen",
-    overview: "To exact vengeance, a young woman infiltrates the household of an influential family as a housemaid to expose their dirty secrets. However, love will get in the way of her revenge plot.",
+    overview:
+        "To exact vengeance, a young woman infiltrates the household of an influential family as a housemaid to expose their dirty secrets. However, love will get in the way of her revenge plot.",
     popularity: 2684.061,
     posterPath: "/ujlkQtHAVShWyWTloGU2Vh5Jbo9.jpg",
     voteAverage: 5,

@@ -48,7 +48,8 @@ void main() {
   blocTest<MovieSearchBloc, MovieSearchState>(
     'should emit [Loading, Loaded] when data is gotten successfully',
     build: () {
-      when(mockSearchMovies.execute(tQuery)).thenAnswer((_) async => Right(tMovieList));
+      when(mockSearchMovies.execute(tQuery))
+          .thenAnswer((_) async => Right(tMovieList));
       return MovieSearchBloc(searchMovies: mockSearchMovies);
     },
     act: (bloc) => bloc.add(OnMovieQueryChanged(tQuery)),
@@ -65,7 +66,8 @@ void main() {
   blocTest<MovieSearchBloc, MovieSearchState>(
     'should emit [Loading, Error] when data is unsuccessful',
     build: () {
-      when(mockSearchMovies.execute(tQuery)).thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+      when(mockSearchMovies.execute(tQuery))
+          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
       return MovieSearchBloc(searchMovies: mockSearchMovies);
     },
     act: (bloc) => bloc.add(OnMovieQueryChanged(tQuery)),

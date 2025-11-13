@@ -74,8 +74,7 @@ void main() {
             .thenAnswer((_) async => Right(testMovieDetail));
         when(mockGetMovieRecommendations.execute(tId))
             .thenAnswer((_) async => Right(tMovies));
-        when(mockGetWatchlistStatus.execute(tId))
-            .thenAnswer((_) async => true);
+        when(mockGetWatchlistStatus.execute(tId)).thenAnswer((_) async => true);
         return MovieDetailBloc(
           getMovieDetail: mockGetMovieDetail,
           getMovieRecommendations: mockGetMovieRecommendations,
@@ -115,8 +114,7 @@ void main() {
         // Tetap mock panggilan lain
         when(mockGetMovieRecommendations.execute(tId))
             .thenAnswer((_) async => Right(tMovies));
-        when(mockGetWatchlistStatus.execute(tId))
-            .thenAnswer((_) async => true);
+        when(mockGetWatchlistStatus.execute(tId)).thenAnswer((_) async => true);
         return MovieDetailBloc(
           getMovieDetail: mockGetMovieDetail,
           getMovieRecommendations: mockGetMovieRecommendations,
@@ -142,8 +140,7 @@ void main() {
             .thenAnswer((_) async => Right(testMovieDetail));
         when(mockGetMovieRecommendations.execute(tId))
             .thenAnswer((_) async => Left(ServerFailure('Failed')));
-        when(mockGetWatchlistStatus.execute(tId))
-            .thenAnswer((_) async => true);
+        when(mockGetWatchlistStatus.execute(tId)).thenAnswer((_) async => true);
         return MovieDetailBloc(
           getMovieDetail: mockGetMovieDetail,
           getMovieRecommendations: mockGetMovieRecommendations,
@@ -172,8 +169,7 @@ void main() {
       build: () {
         when(mockSaveWatchlist.execute(testMovieDetail))
             .thenAnswer((_) async => Right('Added to Watchlist'));
-        when(mockGetWatchlistStatus.execute(tId))
-            .thenAnswer((_) async => true);
+        when(mockGetWatchlistStatus.execute(tId)).thenAnswer((_) async => true);
         return MovieDetailBloc(
           getMovieDetail: mockGetMovieDetail,
           getMovieRecommendations: mockGetMovieRecommendations,

@@ -8,10 +8,12 @@ part 'watchlist_movie_event.dart';
 
 part 'watchlist_movie_state.dart';
 
-class WatchlistMovieBloc extends Bloc<WatchlistMovieEvent, WatchlistMovieState> {
+class WatchlistMovieBloc
+    extends Bloc<WatchlistMovieEvent, WatchlistMovieState> {
   final GetWatchlistMovies getWatchlistMovies;
 
-  WatchlistMovieBloc({required this.getWatchlistMovies}) : super(WatchlistMovieEmpty()) {
+  WatchlistMovieBloc({required this.getWatchlistMovies})
+      : super(WatchlistMovieEmpty()) {
     on<FetchWatchlistMovies>(_onFetchWatchlistMovies);
   }
 

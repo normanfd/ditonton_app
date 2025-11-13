@@ -15,11 +15,14 @@ class TvshowSearchBloc extends Bloc<TvshowSearchEvent, TvshowSearchState> {
   TvshowSearchBloc({required this.searchTvShow}) : super(TvshowSearchEmpty()) {
     on<OnQueryChanged>(
       _onQueryChanged,
-      transformer: (events, mapper) => events.debounceTime(const Duration(milliseconds: 500)).switchMap(mapper),
+      transformer: (events, mapper) => events
+          .debounceTime(const Duration(milliseconds: 500))
+          .switchMap(mapper),
     );
   }
 
-  Future<void> _onQueryChanged(OnQueryChanged event, Emitter<TvshowSearchState> emit) async {
+  Future<void> _onQueryChanged(
+      OnQueryChanged event, Emitter<TvshowSearchState> emit) async {
     final query = event.query;
     if (query.isEmpty) {
       emit(TvshowSearchEmpty());

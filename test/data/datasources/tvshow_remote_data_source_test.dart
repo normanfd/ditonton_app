@@ -5,6 +5,7 @@ import 'package:ditonton/data/datasources/tvshow/tvshow_remote_data_source.dart'
 import 'package:ditonton/data/models/tvshow/season_detail_response.dart';
 import 'package:ditonton/data/models/tvshow/tvshow_detail_response.dart';
 import 'package:ditonton/data/models/tvshow/tvshow_response.dart';
+import 'package:ditonton/util/crashlytics_helper.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
@@ -22,6 +23,7 @@ void main() {
   setUp(() {
     mockHttpClient = MockHttpClient();
     dataSource = TvshowRemoteDataSourceImpl(client: mockHttpClient);
+    CrashlyticsHelper.isTesting = true;
   });
 
   group('get Now Playing Tv show', () {
@@ -221,8 +223,7 @@ void main() {
     test('should throw ServerException when response code is other than 200',
         () async {
       // arrange
-      when(mockHttpClient
-              .get(Uri.parse('$baseUrl/tv/1/season/1?$apiKey')))
+      when(mockHttpClient.get(Uri.parse('$baseUrl/tv/1/season/1?$apiKey')))
           .thenAnswer((_) async => http.Response('Not Found', 404));
       // act
       final call = dataSource.getTvshowSeasonDetail(1, 1);

@@ -6,12 +6,19 @@ import 'package:ditonton/data/models/movie/movie_response.dart';
 import 'package:ditonton/common/exception.dart';
 import 'package:http/http.dart' as http;
 
+import '../../../util/crashlytics_helper.dart';
+
 abstract class MovieRemoteDataSource {
   Future<List<MovieModel>> getNowPlayingMovies();
+
   Future<List<MovieModel>> getPopularMovies();
+
   Future<List<MovieModel>> getTopRatedMovies();
+
   Future<MovieDetailResponse> getMovieDetail(int id);
+
   Future<List<MovieModel>> getMovieRecommendations(int id);
+
   Future<List<MovieModel>> searchMovies(String query);
 }
 
@@ -31,6 +38,8 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
     if (response.statusCode == 200) {
       return MovieResponse.fromJson(json.decode(response.body)).movieList;
     } else {
+      await CrashlyticsHelper.recordApiError(
+          '$BASE_URL/movie/now_playing', response);
       throw ServerException();
     }
   }
@@ -43,6 +52,7 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
     if (response.statusCode == 200) {
       return MovieDetailResponse.fromJson(json.decode(response.body));
     } else {
+      await CrashlyticsHelper.recordApiError('$BASE_URL/movie/$id', response);
       throw ServerException();
     }
   }
@@ -55,6 +65,8 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
     if (response.statusCode == 200) {
       return MovieResponse.fromJson(json.decode(response.body)).movieList;
     } else {
+      await CrashlyticsHelper.recordApiError(
+          '$BASE_URL/movie/$id/recommendations', response);
       throw ServerException();
     }
   }
@@ -67,6 +79,8 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
     if (response.statusCode == 200) {
       return MovieResponse.fromJson(json.decode(response.body)).movieList;
     } else {
+      await CrashlyticsHelper.recordApiError(
+          '$BASE_URL/movie/popular', response);
       throw ServerException();
     }
   }
@@ -79,6 +93,8 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
     if (response.statusCode == 200) {
       return MovieResponse.fromJson(json.decode(response.body)).movieList;
     } else {
+      await CrashlyticsHelper.recordApiError(
+          '$BASE_URL/movie/top_rated', response);
       throw ServerException();
     }
   }
@@ -91,6 +107,8 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
     if (response.statusCode == 200) {
       return MovieResponse.fromJson(json.decode(response.body)).movieList;
     } else {
+      await CrashlyticsHelper.recordApiError(
+          '$BASE_URL/search/movie?query=$query', response);
       throw ServerException();
     }
   }

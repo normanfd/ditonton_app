@@ -44,7 +44,9 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
               );
             } else {
               return Center(
-                child: Text('Belum ada data.', ),
+                child: Text(
+                  'Belum ada data.',
+                ),
               );
             }
           },

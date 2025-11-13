@@ -17,8 +17,7 @@ void main() {
 
   setUp(() {
     mockGetSeasonDetail = MockGetSeasonDetail();
-    seasonDetailBloc =
-        SeasonDetailBloc(getSeasonDetail: mockGetSeasonDetail);
+    seasonDetailBloc = SeasonDetailBloc(getSeasonDetail: mockGetSeasonDetail);
   });
 
   // Tentukan ID dummy untuk pengujian

@@ -10,7 +10,9 @@ class SeasonDetailTvshowPage extends StatefulWidget {
   final int seriesId;
   final int seasonId;
 
-  const SeasonDetailTvshowPage({Key? key, required this.seriesId, required this.seasonId}) : super(key: key);
+  const SeasonDetailTvshowPage(
+      {Key? key, required this.seriesId, required this.seasonId})
+      : super(key: key);
 
   @override
   _SeasonDetailTvshowPageState createState() => _SeasonDetailTvshowPageState();
@@ -20,7 +22,9 @@ class _SeasonDetailTvshowPageState extends State<SeasonDetailTvshowPage> {
   @override
   void initState() {
     super.initState();
-    context.read<SeasonDetailBloc>().add(FetchSeasonDetail(widget.seriesId, widget.seasonId));
+    context
+        .read<SeasonDetailBloc>()
+        .add(FetchSeasonDetail(widget.seriesId, widget.seasonId));
   }
 
   @override

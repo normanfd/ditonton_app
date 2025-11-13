@@ -45,7 +45,8 @@ void main() {
   blocTest<PopularMoviesBloc, PopularMoviesState>(
     'should emit [Loading, Loaded] when data is gotten successfully',
     build: () {
-      when(mockGetPopularMovies.execute()).thenAnswer((_) async => Right(tMovieList));
+      when(mockGetPopularMovies.execute())
+          .thenAnswer((_) async => Right(tMovieList));
       return PopularMoviesBloc(mockGetPopularMovies);
     },
     act: (bloc) => bloc.add(FetchPopularMovies()),
@@ -61,7 +62,8 @@ void main() {
   blocTest<PopularMoviesBloc, PopularMoviesState>(
     'should emit [Loading, Error] when data is unsuccessful',
     build: () {
-      when(mockGetPopularMovies.execute()).thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+      when(mockGetPopularMovies.execute())
+          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
       return PopularMoviesBloc(mockGetPopularMovies);
     },
     act: (bloc) => bloc.add(FetchPopularMovies()),

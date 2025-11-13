@@ -17,7 +17,9 @@ class TvshowListBloc extends Bloc<TvshowListEvent, TvshowListState> {
   final GetTopRatedTvshow getTopRatedTvshows;
 
   TvshowListBloc(
-      {required this.getNowPlayingTvshows, required this.getPopularTvshows, required this.getTopRatedTvshows})
+      {required this.getNowPlayingTvshows,
+      required this.getPopularTvshows,
+      required this.getTopRatedTvshows})
       : super(const TvshowListState()) {
     on<FetchAllTvshowLists>(_onFetchAllTvshowLists);
   }
@@ -45,21 +47,27 @@ class TvshowListBloc extends Bloc<TvshowListEvent, TvshowListState> {
     var newState = state;
 
     nowPlayingResult.fold(
-      (failure) =>
-          newState = newState.copyWith(nowPlayingState: RequestState.Error, nowPlayingMessage: failure.message),
-      (data) => newState = newState.copyWith(nowPlayingState: RequestState.Loaded, nowPlayingTvshows: data),
+      (failure) => newState = newState.copyWith(
+          nowPlayingState: RequestState.Error,
+          nowPlayingMessage: failure.message),
+      (data) => newState = newState.copyWith(
+          nowPlayingState: RequestState.Loaded, nowPlayingTvshows: data),
     );
 
     popularResult.fold(
-      (failure) =>
-          newState = newState.copyWith(popularTvshowsState: RequestState.Error, popularMessage: failure.message),
-      (data) => newState = newState.copyWith(popularTvshowsState: RequestState.Loaded, popularTvshows: data),
+      (failure) => newState = newState.copyWith(
+          popularTvshowsState: RequestState.Error,
+          popularMessage: failure.message),
+      (data) => newState = newState.copyWith(
+          popularTvshowsState: RequestState.Loaded, popularTvshows: data),
     );
 
     topRatedResult.fold(
-      (failure) =>
-          newState = newState.copyWith(topRatedTvshowsState: RequestState.Error, topRatedMessage: failure.message),
-      (data) => newState = newState.copyWith(topRatedTvshowsState: RequestState.Loaded, topRatedTvshows: data),
+      (failure) => newState = newState.copyWith(
+          topRatedTvshowsState: RequestState.Error,
+          topRatedMessage: failure.message),
+      (data) => newState = newState.copyWith(
+          topRatedTvshowsState: RequestState.Loaded, topRatedTvshows: data),
     );
 
     emit(newState);

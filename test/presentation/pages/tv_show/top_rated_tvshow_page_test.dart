@@ -8,7 +8,9 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../../dummy_data/dummy_objects.dart';
 
-class MockTopRatedTvshowBloc extends MockBloc<TopRatedTvshowEvent, TopRatedTvshowState> implements TopRatedTvshowBloc {}
+class MockTopRatedTvshowBloc
+    extends MockBloc<TopRatedTvshowEvent, TopRatedTvshowState>
+    implements TopRatedTvshowBloc {}
 
 void main() {
   late MockTopRatedTvshowBloc mockBloc;
@@ -26,7 +28,8 @@ void main() {
     );
   }
 
-  testWidgets('Page should display progress bar when loading', (WidgetTester tester) async {
+  testWidgets('Page should display progress bar when loading',
+      (WidgetTester tester) async {
     when(() => mockBloc.state).thenReturn(TopRatedTvshowLoading());
 
     final progressFinder = find.byType(CircularProgressIndicator);
@@ -38,7 +41,8 @@ void main() {
     expect(progressFinder, findsOneWidget);
   });
 
-  testWidgets('Page should display when data is loaded', (WidgetTester tester) async {
+  testWidgets('Page should display when data is loaded',
+      (WidgetTester tester) async {
     when(() => mockBloc.state).thenReturn(TopRatedTvshowLoaded([testTvshow]));
     final listViewFinder = find.byType(ListView);
     await tester.pumpWidget(makeTestableWidget(TopRatedTvshowPage()));
@@ -46,7 +50,8 @@ void main() {
     expect(listViewFinder, findsOneWidget);
   });
 
-  testWidgets('Page should display text with message when Error', (WidgetTester tester) async {
+  testWidgets('Page should display text with message when Error',
+      (WidgetTester tester) async {
     when(() => mockBloc.state).thenReturn(TopRatedTvshowError('Error message'));
 
     final textFinder = find.byKey(Key('error_message'));

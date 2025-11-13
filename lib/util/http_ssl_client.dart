@@ -9,6 +9,4 @@ class HttpSslClient {
       ..badCertificateCallback = (cert, host, port) => false;
     return IOClient(httpClient);
   }
-
 }
-

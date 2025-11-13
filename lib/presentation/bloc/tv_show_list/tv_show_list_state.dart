@@ -56,14 +56,14 @@ class TvshowListState extends Equatable {
 
   @override
   List<Object> get props => [
-    nowPlayingTvshows,
-    nowPlayingState,
-    nowPlayingMessage,
-    popularTvshows,
-    popularTvshowsState,
-    popularMessage,
-    topRatedTvshows,
-    topRatedTvshowsState,
-    topRatedMessage,
-  ];
+        nowPlayingTvshows,
+        nowPlayingState,
+        nowPlayingMessage,
+        popularTvshows,
+        popularTvshowsState,
+        popularMessage,
+        topRatedTvshows,
+        topRatedTvshowsState,
+        topRatedMessage,
+      ];
 }
