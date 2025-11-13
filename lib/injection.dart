@@ -33,8 +33,10 @@ import 'package:ditonton/presentation/bloc/tv_show_detail/tv_show_detail_bloc.da
 import 'package:ditonton/presentation/bloc/tv_show_list/tv_show_list_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv_show_search/tv_show_search_bloc.dart';
 import 'package:ditonton/presentation/bloc/watchlist_tv_show/watchlist_tv_show_bloc.dart';
+import 'package:ditonton/util/http_ssl_client.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
+import 'package:http/io_client.dart';
 
 import 'data/datasources/tvshow/tvshow_remote_data_source.dart';
 import 'data/repositories/tvshow_repository_impl.dart';
@@ -47,7 +49,7 @@ import 'domain/usecases/tvshow/search_tvshow.dart';
 
 final locator = GetIt.instance;
 
-void init() {
+Future<void> init() async {
   // bloc - tvshow
   locator.registerFactory(() => NowPlayingTvshowBloc(getNowPlayingTvshow: locator()));
   locator.registerFactory(() => PopularTvshowBloc(getPopularTvshow: locator()));
@@ -127,5 +129,8 @@ void init() {
   locator.registerLazySingleton<DatabaseHelper>(() => DatabaseHelper());
 
   // external
-  locator.registerLazySingleton(() => http.Client());
+  // locator.registerLazySingleton(() => http.Client());
+  final secureClient = await HttpSslClient.create();
+  locator.registerLazySingleton<IOClient>(() => secureClient);
+  locator.registerLazySingleton<http.Client>(() => secureClient);
 }
